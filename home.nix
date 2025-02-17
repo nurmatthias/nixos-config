@@ -22,6 +22,15 @@
     # productivity
     firefox
     kdePackages.kate
+    jetbrains.idea-community
+
+    # gaming
+    heroic
+    lutris
+    protonup-qt
+
+    # themes
+    sweet-nova
   ];
 
   # basic configuration of git
