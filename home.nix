@@ -21,6 +21,7 @@
 
     # productivity
     firefox
+    kdePackages.kate
   ];
 
   # basic configuration of git
