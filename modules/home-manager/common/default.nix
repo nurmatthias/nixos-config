@@ -51,7 +51,13 @@
       ripgrep
       
       # GUI Apps
+      discord
       bambu-studio
+      orca-slicer
+      lutris
+      heroic
+      jetbrains.idea-community
+      
     ]
     ++ lib.optionals stdenv.isDarwin [
       colima
