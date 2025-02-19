@@ -16,15 +16,6 @@
     # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
 
-    # Global catppuccin theme
-    catppuccin.url = "github:catppuccin/nix";
-
-    # NixOS Spicetify - SpotifyClient
-    spicetify-nix = {
-      url = "github:Gerg-L/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Nix Darwin (for MacOS machines)
     darwin = {
       url = "github:LnL7/nix-darwin";
@@ -37,7 +28,6 @@
 
   outputs = {
     self,
-    catppuccin,
     darwin,
     home-manager,
     nix-homebrew,
@@ -93,7 +83,6 @@
         };
         modules = [
           ./home/${username}/${hostname}
-          catppuccin.homeManagerModules.catppuccin
         ];
       };
   in {

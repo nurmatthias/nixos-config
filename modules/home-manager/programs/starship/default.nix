@@ -60,6 +60,4 @@
     };
   };
 
-  # Enable catppuccin theming for starship.
-  catppuccin.starship.enable = true;
 }
