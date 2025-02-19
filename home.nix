@@ -60,25 +60,23 @@
       env.TERM = "xterm-256color";
       font = {
         size = 12;
-        draw_bold_text_with_bright_colors = true;
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
     };
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
     enableCompletion = true;
-    # TODO add your custom bashrc here
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
-    '';
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
 
-    # set some aliases, feel free to add more or remove some
     shellAliases = {
-      k = "kubectl";
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
     };
+    history.size = 10000;
   };
 
   # This value determines the home Manager release that your

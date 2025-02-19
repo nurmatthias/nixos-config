@@ -103,6 +103,7 @@
     description = "Matthias";
     extraGroups = [ "networkmanager" "wheel" ];
   };
+  users.defaultUserShell = pkgs.zsh;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -117,6 +118,8 @@
     jdk
     python313
   ];
+
+  programs.zsh.enable = true;
 
   programs.steam = {
     enable = true;
