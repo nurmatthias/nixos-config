@@ -44,4 +44,6 @@
     tali # poker game
     yelp # help viewer
   ];
+  
+  services.flatpak.enable = true;
 }

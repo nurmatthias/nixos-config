@@ -1,4 +1,11 @@
 {userConfig, ...}: {
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+	
   services.flameshot = {
     enable = true;
     settings = {
@@ -7,9 +14,9 @@
         drawColor = "#ff2800";
         drawFontSize = "4";
         saveAsFileExtension = ".png";
-        savePath = "/home/${userConfig.name}/Pictures";
+        savePath = "/home/${userConfig.name}/Bilder";
         savePathFixed = "true";
-        showDesktopNotification = "false";
+        showDesktopNotification = "true";
         showHelp = "false";
         showMagnifier = "true";
         showStartupLaunchMessage = "false";

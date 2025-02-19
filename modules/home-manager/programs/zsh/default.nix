@@ -20,9 +20,9 @@
       lt = "eza --tree --level=2 --icons"; # tree
       
       # Nix
-      nupdate = "nix update flakes"
-      nswitch = "sudo nixos-rebuild switch --flake ~/nixos-config/"
-      hmswitch = "home-manager switch --flake ~/nixos-config/"
+      nupdate = "nix update flakes";
+      nswitch = "sudo nixos-rebuild switch --flake ~/nixos-config/";
+      hmswitch = "home-manager switch --flake ~/nixos-config/";
     };
     initExtra = ''
       

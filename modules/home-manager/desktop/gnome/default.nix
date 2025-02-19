@@ -17,6 +17,7 @@ with lib.hm.gvariant; {
   home.packages = with pkgs; [
     gnome-pomodoro
     gnome-tweaks
+    gnome-software
     gnomeExtensions.auto-move-windows
     gnomeExtensions.blur-my-shell
     gnomeExtensions.clipboard-history
@@ -115,12 +116,6 @@ with lib.hm.gvariant; {
       "accel-profile" = "flat";
     };
 
-    "org/gnome/desktop/peripherals/touchpad" = {
-      "speed" = 0.4;
-      "tap-to-click" = true;
-      "two-finger-scrolling-enabled" = true;
-    };
-
     "org/gnome/desktop/privacy" = {
       "old-files-age" = mkUint32 30;
       "recent-files-max-age" = -1;
@@ -200,21 +195,15 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      "binding" = "<Control>space";
+      "binding" = "<Alt>space";
       "command" = "ulauncher-toggle";
       "name" = "Ulauncher";
     };
-
+    
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      "binding" = "<Shift><Super>s";
+      "binding" = "<Print>";
       "command" = "flameshot-wayland";
       "name" = "Flameshot";
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-      "binding" = "<Shift><Alt>2";
-      "command" = "ocr";
-      "name" = "OCR";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
@@ -239,12 +228,6 @@ with lib.hm.gvariant; {
       "binding" = "<Alt><Ctrl>q";
       "command" = "gnome-session-quit";
       "name" = "Logout";
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7" = {
-      "binding" = "<Shift><Super>t";
-      "command" = "telegram-desktop";
-      "name" = "Telegram";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8" = {
@@ -277,7 +260,6 @@ with lib.hm.gvariant; {
         "org.gnome.Nautilus.desktop"
         "brave-browser.desktop"
         "Alacritty.desktop"
-        "org.telegram.desktop.desktop"
       ];
     };
 
@@ -285,10 +267,7 @@ with lib.hm.gvariant; {
       "application-list" = [
         "brave-browser.desktop:1"
         "Alacritty.desktop:2"
-        "org.telegram.desktop.desktop:3"
-        "com.obsproject.Studio.desktop:4"
-        "steam.desktop:4"
-        "Zoom.desktop:5"
+        "steam.desktop:3"
       ];
     };
 
@@ -331,7 +310,7 @@ with lib.hm.gvariant; {
       "background-opacity" = 0.8;
       "custom-background-color" = true;
       "custom-theme-shrink" = true;
-      "dash-max-icon-size" = 32;
+      "dash-max-icon-size" = 48;
       "dock-fixed" = false;
       "dock-position" = "BOTTOM";
       "extend-height" = false;
@@ -342,8 +321,8 @@ with lib.hm.gvariant; {
       "preferred-monitor" = -2;
       "preferred-monitor-by-connector" = "DisplayPort-0";
       "preview-size-scale" = 0.0;
-      "show-show-apps-button" = false;
-      "show-trash" = false;
+      "show-show-apps-button" = true;
+      "show-trash" = true;
       "transparency-mode" = "DYNAMIC";
     };
 

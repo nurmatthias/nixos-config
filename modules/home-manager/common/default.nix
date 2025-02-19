@@ -49,6 +49,9 @@
       jq
       nh
       ripgrep
+      
+      # GUI Apps
+      bambu-studio
     ]
     ++ lib.optionals stdenv.isDarwin [
       colima
