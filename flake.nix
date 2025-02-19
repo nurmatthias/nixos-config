@@ -1,36 +1,115 @@
 {
-  description = "A simple NixOS flake";
-
+  description = "NixOS and nix-darwin configs for my machines";
+  
   inputs = {
-    # NixOS official package source, using the nixos-24.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # Nixpkgs
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    # home-manager, used for managing user configuration
+    # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # NixOS profiles to optimize settings for different hardware
+    hardware.url = "github:nixos/nixos-hardware";
+
+    # Global catppuccin theme
+    catppuccin.url = "github:catppuccin/nix";
+
+    # NixOS Spicetify - SpotifyClient
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Nix Darwin (for MacOS machines)
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Homebrew
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      Workstation-Matthias = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
+  outputs = {
+    self,
+    catppuccin,
+    darwin,
+    home-manager,
+    nix-homebrew,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
 
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.matthias = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-          }
-        ];
+    # Define user configurations
+    users = {
+      matthias = {
+        avatar = ./files/avatar/face;
+        email = "matthias@engelien.info";
+        fullName = "Matthias Engelien";
+        name = "matthias";
       };
     };
+
+    # Function for NixOS system configuration
+    mkNixosConfiguration = hostname: username:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${username};
+          nixosModules = "${self}/modules/nixos";
+        };
+        modules = [./hosts/${hostname}];
+      };
+
+    # Function for nix-darwin system configuration
+    mkDarwinConfiguration = hostname: username:
+      darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs outputs hostname;
+          userConfig = users.${username};
+        };
+        modules = [
+          ./hosts/${hostname}
+          home-manager.darwinModules.home-manager
+          nix-homebrew.darwinModules.nix-homebrew
+        ];
+      };
+
+    # Function for Home Manager configuration
+    mkHomeConfiguration = system: username: hostname:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {inherit system;};
+        extraSpecialArgs = {
+          inherit inputs outputs;
+          userConfig = users.${username};
+          nhModules = "${self}/modules/home-manager";
+        };
+        modules = [
+          ./home/${username}/${hostname}
+          catppuccin.homeManagerModules.catppuccin
+        ];
+      };
+  in {
+    nixosConfigurations = {
+      Workstation-Matthias = mkNixosConfiguration "Workstation-Matthias" "matthias";
+    };
+
+    #darwinConfigurations = {
+      #"mengelien-macos" = mkDarwinConfiguration "mengelien-macos" "mengelien-privat";
+    #};
+
+    homeConfigurations = {
+      "matthias@Workstation-Matthias" = mkHomeConfiguration "x86_64-linux" "matthias" "Workstation-Matthias";
+      #"mengelien-privat@mengelien-macos" = mkHomeConfiguration "aarch64-darwin" "mengelien-privat" "mengelien-macos";
+    };
+
+    overlays = import ./overlays {inherit inputs;};
   };
 }
