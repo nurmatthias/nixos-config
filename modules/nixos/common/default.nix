@@ -100,7 +100,7 @@
   services.devmon.enable = true;
 
   # Enable PipeWire for sound
-  services.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -155,8 +155,7 @@
 
   # Fonts configuration
   fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.meslo-lg
+    nerdfonts
     roboto
   ];
 

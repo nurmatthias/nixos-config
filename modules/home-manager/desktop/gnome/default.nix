@@ -72,13 +72,13 @@ with lib.hm.gvariant; {
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {
-      "show-hidden" = true;
+      "show-hidden" = false;
     };
 
     "org/gtk/settings/file-chooser" = {
       "date-format" = "regular";
       "location-mode" = "path-bar";
-      "show-hidden" = true;
+      "show-hidden" = false;
       "show-size-column" = true;
       "show-type-column" = true;
       "sort-column" = "name";
@@ -99,9 +99,9 @@ with lib.hm.gvariant; {
 
     "org/gnome/desktop/input-sources" = {
       "current" = mkUint32 0;
-      "mru-sources" = [(mkTuple ["xkb" "pl"]) (mkTuple ["xkb" "ru"])];
+      "mru-sources" = [(mkTuple ["xkb" "de"])];
       "show-all-sources" = false;
-      "sources" = [(mkTuple ["xkb" "pl"]) (mkTuple ["xkb" "ru"])];
+      "sources" = [(mkTuple ["xkb" "de"])];
       "xkb-options" = ["terminate:ctrl_alt_bksp"];
     };
 
