@@ -1,10 +1,7 @@
 {pkgs, ...}: {
 
   # activate GDM
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-  };
+  services.xserver.displayManager.gdm.enable = true;
 
   # Call dbus-update-activation-environment on login
   services.xserver.updateDbusEnvironment = true;

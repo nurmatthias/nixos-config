@@ -87,7 +87,6 @@
     xkb.layout = "de";
     xkb.variant = "nodeadkeys";
     excludePackages = with pkgs; [xterm];
-    displayManager.gdm.enable = true;
   };
 
   # PATH configuration

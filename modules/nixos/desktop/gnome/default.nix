@@ -3,10 +3,7 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # activate GDM
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-  };
+  services.xserver.displayManager.gdm.enable = true;
 
   # Remove decorations for QT applications
   environment.sessionVariables = {
