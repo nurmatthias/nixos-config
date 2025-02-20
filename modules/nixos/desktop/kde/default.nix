@@ -19,7 +19,7 @@ in {
     enable = true;
     wayland.enable = true;
     settings.General.DisplayServer = "wayland";
-    theme = "breeze-dark";
+    #theme = "breeze-dark";
   };
 
   # Excluding some KDE applications from the default install
@@ -28,10 +28,10 @@ in {
   ];
   
   # Setting another Background for SDDM
-  environment.systemPackages = [
-    (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
-      [General]
-      background=${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/MilkyWay/contents/images/5120x2880.png
-    '')
-  ];
+  #environment.systemPackages = [
+  #  (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+  #    [General]
+  #    background=${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/MilkyWay/contents/images/5120x2880.png
+  #  '')
+  #];
 }
