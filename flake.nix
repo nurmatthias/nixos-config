@@ -13,6 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Plasma Manager - Settings for KDE
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -82,6 +89,7 @@
           nhModules = "${self}/modules/home-manager";
         };
         modules = [
+          inputs.plasma-manager.homeManagerModules.plasma-manager
           ./home/${username}/${hostname}
         ];
       };

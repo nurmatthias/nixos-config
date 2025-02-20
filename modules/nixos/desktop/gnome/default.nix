@@ -2,6 +2,12 @@
   # Enable GNOME
   services.xserver.desktopManager.gnome.enable = true;
 
+  # activate GDM
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+  };
+
   # Remove decorations for QT applications
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
