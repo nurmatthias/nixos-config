@@ -9,5 +9,5 @@
 
   programs.gamescope.enable = true;
 
-  programs.gamemode.enable
+  programs.gamemode.enable = true;
 }
