@@ -142,6 +142,7 @@
     gnumake
     killall
     mesa
+    xsettingsd
   ];
 
   # Docker configuration
