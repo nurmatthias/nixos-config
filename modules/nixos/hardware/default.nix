@@ -13,6 +13,18 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [rocmPackages.clr.icd];
+  };
+
+  hardware.amdgpu = {
+    amdvlk = {
+      enable = true;
+      support32Bit.enable = true;
+    };
+
+      opencl.enable = true;
+
+      initrd.enable = true;
   };
 
   # enable xbox one dongle
