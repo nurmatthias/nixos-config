@@ -57,6 +57,7 @@
       lutris
       heroic
       jetbrains.idea-community
+      mangohud
       
     ]
     ++ lib.optionals stdenv.isDarwin [
