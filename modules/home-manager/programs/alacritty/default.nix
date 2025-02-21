@@ -21,11 +21,7 @@
       };
 
       window = {
-        decorations =
-          if pkgs.stdenv.isDarwin
-          then "buttonless"
-          else "none";
-        dynamic_title = false;
+        dynamic_title = true;
         dynamic_padding = true;
         dimensions = {
           columns = 170;
