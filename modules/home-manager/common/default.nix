@@ -6,9 +6,7 @@
 }: {
   imports = [
     ../programs/alacritty
-    ../programs/atuin
     ../programs/brave
-    ../programs/btop
     ../programs/fastfetch
     ../programs/fzf
     ../programs/git
