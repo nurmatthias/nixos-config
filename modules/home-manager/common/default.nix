@@ -49,6 +49,11 @@
       jq
       nh
       ripgrep
+      pavucontrol
+      pulseaudio
+      tesseract
+      unzip
+      wl-clipboard
       
       # GUI Apps
       discord
@@ -58,17 +63,6 @@
       heroic
       jetbrains.idea-community
       mangohud
-      
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      colima
-    ]
-    ++ lib.optionals (!stdenv.isDarwin) [
-      pavucontrol
-      pulseaudio
-      tesseract
-      unzip
-      wl-clipboard
     ];
 
 }
