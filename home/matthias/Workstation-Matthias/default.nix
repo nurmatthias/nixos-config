@@ -1,9 +1,9 @@
 {nhModules, ...}: {
   imports = [
     "${nhModules}/common"
-    #"${nhModules}/desktop/hyprland"
+    "${nhModules}/desktop/hyprland"
     #"${nhModules}/desktop/gnome"
-    "${nhModules}/desktop/kde"
+    #"${nhModules}/desktop/kde"
     #"${nhModules}/services/ulauncher"
   ];
 
