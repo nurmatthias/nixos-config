@@ -147,12 +147,7 @@
     xsettingsd
   ];
 
-  # Docker configuration
-  #virtualisation.docker.enable = true;
-  #virtualisation.docker.rootless.enable = true;
-  #virtualisation.docker.rootless.setSocketVariable = true;
-
-  flatpak.enable = false;
+  services.flatpak.enable = false;
   systemd.services.flatpak-repo = {
       path = [ pkgs.flatpak ];
       script = ''
