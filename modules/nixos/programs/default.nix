@@ -1,8 +1,8 @@
 {pkgs, ...}: {
 
   imports = [
-    "./corectrl"
-    "./steam"
+    ./corectrl
+    ./steam
   ];
 
   programs.appimage = {
