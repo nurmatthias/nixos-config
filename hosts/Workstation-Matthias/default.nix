@@ -10,9 +10,10 @@
 
     ./hardware-configuration.nix
     "${nixosModules}/common"
-    "${nixosModules}/hardware"
     "${nixosModules}/desktop/kde"
-    "${nixosModules}/programs/steam"
+    "${nixosModules}/hardware"
+    "${nixosModules}/programs"
+    "${nixosModules}/services"
   ];
 
   # Set hostname

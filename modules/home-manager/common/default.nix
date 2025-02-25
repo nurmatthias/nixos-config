@@ -8,13 +8,12 @@
     ../programs/alacritty
     ../programs/brave
     ../programs/fastfetch
-    ../programs/fzf
     ../programs/git
     ../programs/gpg
     ../programs/starship
-    ../programs/tmux
     ../programs/zsh
     ../scripts
+    ../services
   ];
 
   # Nixpkgs configuration
@@ -31,28 +30,12 @@
   # Home-Manager configuration for the user's home environment
   home = {
     username = "${userConfig.name}";
-    homeDirectory =
-      if pkgs.stdenv.isDarwin
-      then "/Users/${userConfig.name}"
-      else "/home/${userConfig.name}";
+    homeDirectory = "/home/${userConfig.name}";
   };
 
   # Ensure common packages are installed
   home.packages = with pkgs;
     [
-      dig
-      du-dust
-      eza
-      fd
-      jq
-      nh
-      ripgrep
-      pavucontrol
-      pulseaudio
-      tesseract
-      unzip
-      wl-clipboard
-      
       # GUI Apps
       discord
       bambu-studio

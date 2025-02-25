@@ -1,10 +1,8 @@
 {
-  description = "NixOS and nix-darwin configs for my machines";
+  description = "NixOS config for my machine";
   
   inputs = {
     # Nixpkgs
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Home manager
@@ -22,22 +20,11 @@
 
     # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
-
-    # Nix Darwin (for MacOS machines)
-    darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Homebrew
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
   outputs = {
     self,
-    darwin,
     home-manager,
-    nix-homebrew,
     nixpkgs,
     ...
   } @ inputs: let
@@ -46,7 +33,6 @@
     # Define user configurations
     users = {
       matthias = {
-        avatar = ./files/avatar/face;
         email = "matthias@engelien.info";
         fullName = "Matthias Engelien";
         name = "matthias";
@@ -64,23 +50,8 @@
         modules = [./hosts/${hostname}];
       };
 
-    # Function for nix-darwin system configuration
-    mkDarwinConfiguration = hostname: username:
-      darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {
-          inherit inputs outputs hostname;
-          userConfig = users.${username};
-        };
-        modules = [
-          ./hosts/${hostname}
-          home-manager.darwinModules.home-manager
-          nix-homebrew.darwinModules.nix-homebrew
-        ];
-      };
-
     # Function for Home Manager configuration
-    mkHomeConfiguration = system: username: hostname:
+    mkHomeConfiguration = system: username:
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {inherit system;};
         extraSpecialArgs = {
@@ -90,7 +61,7 @@
         };
         modules = [
           inputs.plasma-manager.homeManagerModules.plasma-manager
-          ./home/${username}/${hostname}
+          ./home/${username}
         ];
       };
   in {
@@ -98,13 +69,8 @@
       Workstation-Matthias = mkNixosConfiguration "Workstation-Matthias" "matthias";
     };
 
-    #darwinConfigurations = {
-      #"mengelien-macos" = mkDarwinConfiguration "mengelien-macos" "mengelien-privat";
-    #};
-
     homeConfigurations = {
-      "matthias@Workstation-Matthias" = mkHomeConfiguration "x86_64-linux" "matthias" "Workstation-Matthias";
-      #"mengelien-privat@mengelien-macos" = mkHomeConfiguration "aarch64-darwin" "mengelien-privat" "mengelien-macos";
+      "matthias" = mkHomeConfiguration "x86_64-linux" "matthias";
     };
 
     overlays = import ./overlays {inherit inputs;};

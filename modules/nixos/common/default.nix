@@ -21,40 +21,60 @@
   # Register flake inputs for nix commands
   nix.registry = lib.mapAttrs (_: flake: {inherit flake;}) (lib.filterAttrs (_: lib.isType "flake") inputs);
 
-  # Add inputs to legacy channels
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs' (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
   # Nix settings
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
-  };
+  nix = {
+      settings = {
+        auto-optimise-store = true;
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+    };
 
-  # Boot settings
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
-    consoleLogLevel = 0;
-    initrd.verbose = false;
-    kernelParams = ["quiet" "splash"];
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = true;
-    loader.timeout = 0;
-    plymouth.enable = true;
+      kernelPackages = pkgs.linuxPackages_zen; # zen Kernel
 
-    # v4l (virtual camera) module settings
-    #kernelModules = ["v4l2loopback"];
-    #extraModulePackages = with config.boot.kernelPackages; [
-    #  v4l2loopback
-    #];
-    #extraModprobeConfig = ''
-    #  options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
-    #'';
+      kernelParams = [
+        "systemd.mask=systemd-vconsole-setup.service"
+        "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
+        "nowatchdog"
+        "modprobe.blacklist=sp5100_tco" #watchdog for AMD
+        "modprobe.blacklist=iTCO_wdt" #watchdog for Intel
+   	  ];
+
+      initrd = {
+        availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+        kernelModules = [ ];
+      };
+
+      # Needed For Some Steam Games
+      kernel.sysctl = {
+        "vm.max_map_count" = 2147483642;
+      };
+
+      # Bootloader SystemD
+      loader.systemd-boot.enable = true;
+      loader.efi.canTouchEfiVariables = true;
+      loader.timeout = 5;
+
+      # Make /tmp a tmpfs
+      tmp = {
+        useTmpfs = false;
+        tmpfsSize = "30%";
+      };
+
+      # Appimage Support
+      binfmt.registrations.appimage = {
+        wrapInterpreterInShell = false;
+        interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+        recognitionType = "magic";
+        offset = 0;
+        mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+        magicOrExtension = ''\x7fELF....AI\x02'';
+     };
   };
 
   # Networking
@@ -117,30 +137,12 @@
     shell = pkgs.zsh;
   };
 
-  # Set User's avatar
-  system.activationScripts.script.text = ''
-    mkdir -p /var/lib/AccountsService/{icons,users}
-    cp ${userConfig.avatar} /var/lib/AccountsService/icons/${userConfig.name}
-
-    touch /var/lib/AccountsService/users/${userConfig.name}
-
-    if ! grep -q "^Icon=" /var/lib/AccountsService/users/${userConfig.name}; then
-      if ! grep -q "^\[User\]" /var/lib/AccountsService/users/${userConfig.name}; then
-        echo "[User]" >> /var/lib/AccountsService/users/${userConfig.name}
-      fi
-      echo "Icon=/var/lib/AccountsService/icons/${userConfig.name}" >> /var/lib/AccountsService/users/${userConfig.name}
-    fi
-  '';
-
   # Passwordless sudo
   #security.sudo.wheelNeedsPassword = false;
 
   # System packages
   environment.systemPackages = with pkgs; [
-    gcc
-    glib
-    gnumake
-    killall
+    git
     mesa
     xsettingsd
   ];
@@ -150,8 +152,27 @@
   #virtualisation.docker.rootless.enable = true;
   #virtualisation.docker.rootless.setSocketVariable = true;
 
-  # Zsh configuration
-  programs.zsh.enable = true;
+  flatpak.enable = false;
+  systemd.services.flatpak-repo = {
+      path = [ pkgs.flatpak ];
+      script = ''
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      '';
+    };
+
+    # zram
+    zramSwap = {
+  	  enable = true;
+  	  priority = 100;
+  	  memoryPercent = 30;
+  	  swapDevices = 1;
+      algorithm = "zstd";
+      };
+
+    powerManagement = {
+        enable = true;
+  	    cpuFreqGovernor = "schedutil";
+    };
 
   # Fonts configuration
   fonts.packages = with pkgs; [
@@ -164,4 +185,7 @@
 
   # OpenSSH daemon
   services.openssh.enable = true;
+
+  # environment variables
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
