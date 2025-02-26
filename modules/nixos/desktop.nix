@@ -17,7 +17,7 @@
     adwaita-qt6
     adwaita-icon-theme
     gnome-settings-daemon
-    gnome.gnome-tweaks
+    gnome-tweaks
 
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell

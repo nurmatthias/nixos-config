@@ -15,6 +15,7 @@
     heroic
     jetbrains.idea-community
     mangohud
+    firefox
   ];
 
   programs.home-manager.enable = true;
