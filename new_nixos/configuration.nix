@@ -1,14 +1,14 @@
 ## configuration.nix
-{ inputs, config, pkgs, ... }:
+{ config, pkgs, home, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-gpu-amd
+#    hardware.nixosModules.common-cpu-intel
+#    hardware.nixosModules.common-gpu-amd
 
     ./modules/desktop.nix
     ./modules/hardware.nix
-    ./modules/home.nix
+#    ./modules/home.nix
     ./modules/users.nix
     ./modules/services.nix
     ./modules/stylix.nix

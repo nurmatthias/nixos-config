@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 {
   stylix.enable = true;
-  stylix.image = "../files/wallpaper/wallpaper.jpg";
+  stylix.image = ../files/wallpaper/wallpaper.jpg;
   stylix.polarity = "dark";
 
   stylix.fonts = {

@@ -2,16 +2,16 @@
 { config, pkgs, ... }:
 {
   # PATH configuration
-  environment.localBinInPath = true;
+#  environment.localBinInPath = true;
 
   # Environment variables
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+#  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Fonts
-  fonts.packages = with pkgs; [
-    nerdfonts
-    roboto
-  ];
+#  fonts.packages = with pkgs; [
+#    nerdfonts
+#    roboto
+#  ];
 
   home = {
     username = "matthias";
@@ -30,12 +30,12 @@
 
 
   # System level packages/programs
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
-  programs.gamescope.enable = true;
-  programs.gamemode.enable = true;
+# programs.steam = {
+#    enable = true;
+#    gamescopeSession.enable = true;
+#  };
+#  programs.gamescope.enable = true;
+#  programs.gamemode.enable = true;
 
   programs.home-manager.enable = true;
 

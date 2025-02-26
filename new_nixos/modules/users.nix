@@ -5,7 +5,7 @@
     description = "Matthias";
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+#    shell = pkgs.zsh;
   };
 }
 

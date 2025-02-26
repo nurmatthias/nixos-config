@@ -16,7 +16,7 @@
     hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix }: {
+  outputs = { self, nixpkgs, home-manager, stylix, hardware }: {
     nixosConfigurations = {
       Workstation-Matthias = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
