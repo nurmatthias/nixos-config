@@ -14,6 +14,7 @@
   # Environment variables
   # temporary fix for https://github.com/NixOS/nixpkgs/issues/353588
   environment.variables.GSK_RENDERER = "gl";
+  environment.variables.NO_POINTER_VIEWPORT = 1;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   
   environment.shells = with pkgs; [ zsh ];
