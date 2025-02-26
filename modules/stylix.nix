@@ -28,11 +28,19 @@ in
       package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
       name = "JetBrainsMono Nerd Font Mono";
     };
+    
+    sizes = {
+      applications = 11;
+      desktop = 11;
+      popups = 10;
+      terminal = 11;
+    };
   };
   
-  stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Classic";
-    
+  #stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Adwaita";
+  stylix.cursor.size = 22;
+      
   stylix.opacity = {
     terminal = opacity;
     popups = opacity;
