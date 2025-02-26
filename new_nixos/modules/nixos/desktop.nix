@@ -21,7 +21,6 @@
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pop-shell
-
   ];
 
   environment.gnome.excludePackages = with pkgs; [

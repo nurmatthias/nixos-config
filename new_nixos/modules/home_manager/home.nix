@@ -1,17 +1,6 @@
 ## modules/packages.nix
 { config, pkgs, ... }:
 {
-  # PATH configuration
-#  environment.localBinInPath = true;
-
-  # Environment variables
-#  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  # Fonts
-#  fonts.packages = with pkgs; [
-#    nerdfonts
-#    roboto
-#  ];
 
   home = {
     username = "matthias";
@@ -27,15 +16,6 @@
     jetbrains.idea-community
     mangohud
   ];
-
-
-  # System level packages/programs
-# programs.steam = {
-#    enable = true;
-#    gamescopeSession.enable = true;
-#  };
-#  programs.gamescope.enable = true;
-#  programs.gamemode.enable = true;
 
   programs.home-manager.enable = true;
 

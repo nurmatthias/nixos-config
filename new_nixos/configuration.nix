@@ -3,16 +3,14 @@
 {
   imports = [
     ./hardware-configuration.nix
-#    hardware.nixosModules.common-cpu-intel
-#    hardware.nixosModules.common-gpu-amd
 
-    ./modules/desktop.nix
-    ./modules/hardware.nix
-#    ./modules/home.nix
-    ./modules/users.nix
-    ./modules/services.nix
+    ./modules/nixos/desktop.nix
+    ./modules/nixos/hardware.nix
+    ./modules/nixos/services.nix
+    ./modules/nixos/system.nix
+    ./modules/nixos/user_settings.nix
+    
     ./modules/stylix.nix
-    ./modules/system.nix
   ];
 
 
