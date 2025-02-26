@@ -8,6 +8,8 @@ in
 {
   
   stylix.enable = true;
+  stylix.autoEnable = true;
+  
   stylix.image = ../files/wallpaper/wallpaper.jpg;
   stylix.polarity = "dark";
 
@@ -23,29 +25,14 @@ in
     };
 
     monospace = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans Mono";
+      package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
+      name = "JetBrainsMono Nerd Font Mono";
     };
-
-    emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
+  };
+  
+  stylix.cursor.package = pkgs.bibata-cursors;
+  stylix.cursor.name = "Bibata-Modern-Classic";
     
-    sizes = {
-      applications = fontSize;
-      desktop = fontSize;
-      popups = fontSize;
-      terminal = fontSize;
-    };
-  };
-  
-  cursor = {
-    package = pkgs.apple-cursor;
-    name = "apple_cursor";
-    size = 22;
-  };
-  
   stylix.opacity = {
     terminal = opacity;
     popups = opacity;

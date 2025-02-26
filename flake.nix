@@ -16,13 +16,14 @@
     hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, hardware }: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
       Workstation-Matthias = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix
-          stylix.nixosModules.stylix
+          inputs.stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -35,8 +36,10 @@
     homeConfigurations = {
       matthias = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        specialArgs = {inherit inputs;};
         modules = [
           ./modules/home.nix
+          inputs.stylix.homeManagerModules.stylix
         ];
       };
     };
