@@ -14,12 +14,26 @@
 
     # NixOS profiles to optimize settings for different hardware
     hardware.url = "github:nixos/nixos-hardware";
+    
+    # Plasma Manager to configer KDE
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs: 
+  let
+    username = "matthias";
+    hostname = "Workstation-Matthias";
+    system = "x86_64-linux";
+  in
+  {
     nixosConfigurations = {
-      Workstation-Matthias = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      ${hostname} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        
         specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix
@@ -28,7 +42,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bak";
-            home-manager.users.matthias = import ./modules/home_manager/home.nix;
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            
+            home-manager.users."${username}" = import ./modules/home_manager/home.nix;
           }
         ];
       };
@@ -36,10 +52,12 @@
 
     homeConfigurations = {
       matthias = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = import nixpkgs { inherit system; };
+        
         specialArgs = {inherit inputs;};
         modules = [
           ./modules/home.nix
+          inputs.plasma-manager.homeManagerModules.plasma-manager
           inputs.stylix.homeManagerModules.stylix
         ];
       };

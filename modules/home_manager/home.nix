@@ -2,6 +2,10 @@
 { config, pkgs, ... }:
 {
 
+  imports = [
+    ./plasma.nix
+  ];
+
   home = {
     username = "matthias";
     homeDirectory = "/home/matthias";

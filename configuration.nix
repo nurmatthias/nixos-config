@@ -4,7 +4,7 @@
   imports = [
     ./hardware-configuration.nix
 
-    ./modules/nixos/desktop.nix
+    ./modules/nixos/desktop
     ./modules/nixos/hardware.nix
     ./modules/nixos/services.nix
     ./modules/nixos/system.nix
