@@ -10,6 +10,13 @@
     username = "matthias";
     homeDirectory = "/home/matthias";
   };
+  
+  # Environment
+  home.sessionVariables = {
+    EDITOR = "nano";
+    BROWSER = "firefox";
+    TERMINAL = "kitty";
+  };
 
   home.packages = with pkgs; [
     discord
@@ -30,6 +37,15 @@
     userEmail = "git@engelien.info";
     extraConfig = {
       pull.rebase = "true";
+    };
+  };
+  
+  programs.kitty = {
+    enable = true;
+    settings = {
+      confirm_os_window_close = 0;
+      dynamic_background_opacity = true;
+      enable_audio_bell = false;
     };
   };
 
