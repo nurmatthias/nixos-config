@@ -2,8 +2,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./gnome.nix
-    #./kde.nix
+    #./gnome.nix
+    ./kde.nix
   ];
 }
 
