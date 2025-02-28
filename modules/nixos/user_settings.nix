@@ -51,6 +51,8 @@
   programs.firefox = {
     enable = true;
 
+    languagePacks = ["de"];
+
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
