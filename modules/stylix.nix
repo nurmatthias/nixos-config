@@ -38,7 +38,7 @@ in
   };
   
   #stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Adwaita";
+  stylix.cursor.name = "Breeze";
   stylix.cursor.size = 22;
       
   stylix.opacity = {
