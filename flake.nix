@@ -11,9 +11,6 @@
     # System level styling for all applications and desktops
     stylix.url = "github:danth/stylix/release-24.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # NixOS profiles to optimize settings for different hardware
-    hardware.url = "github:nixos/nixos-hardware";
     
     # Plasma Manager to configer KDE
     plasma-manager = {

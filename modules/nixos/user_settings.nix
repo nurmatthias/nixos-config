@@ -26,6 +26,10 @@
   ];
 
   # System level packages/programs
+  environment.systemPackages = with pkgs: [
+    protonup
+  ];
+  
   programs = {
     steam = {
       enable = true;
