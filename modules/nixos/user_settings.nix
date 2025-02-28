@@ -45,7 +45,7 @@
       syntaxHighlighting.enable = true;
     };
     
-    dconf.enable = true;
+    kdeconnect.enable = true;
   };
 
   programs.firefox = {
