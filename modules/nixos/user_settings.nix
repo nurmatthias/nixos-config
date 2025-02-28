@@ -26,7 +26,7 @@
   ];
 
   # System level packages/programs
-  environment.systemPackages = with pkgs: [
+  environment.systemPackages = with pkgs; [
     protonup
   ];
   
