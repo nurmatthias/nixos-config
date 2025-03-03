@@ -76,11 +76,4 @@
     enable = true;
     cpuFreqGovernor = "schedutil";
   };
-
-
-  # essential packages
-  environment.systemPackages = with pkgs; [
-    git
-    mesa
-  ];
 }

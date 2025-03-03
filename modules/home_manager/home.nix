@@ -24,11 +24,9 @@
 
   home.packages = with pkgs; [
     discord
-    bambu-studio
     orca-slicer
     lutris
     heroic
-    jetbrains.idea-community
     mangohud
   ];
 

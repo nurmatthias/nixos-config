@@ -28,7 +28,8 @@
   # System level packages/programs
   environment.systemPackages = with pkgs; [
     protonup
-    keyd
+    git
+    mesa
   ];
   
   programs = {
