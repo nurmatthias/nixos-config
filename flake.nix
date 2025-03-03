@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, plasma-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     username = "matthias";
     hostname = "Workstation-Matthias";
@@ -39,7 +39,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bak";
-            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.sharedModules = [
+              inputs.plasma-manager.homeManagerModules.plasma-manager
+            ];
             
             home-manager.users."${username}" = import ./modules/home_manager/home.nix;
           }
