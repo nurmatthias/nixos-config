@@ -30,6 +30,8 @@
     protonup
     git
     mesa
+    xsettingsd
+    xorg.xrdb
   ];
   
   programs = {
