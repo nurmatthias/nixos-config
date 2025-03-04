@@ -13,6 +13,10 @@
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
+
+    plasma-browser-integration
   ];
+
+  programs.dconf.enable = true;
 }
 
