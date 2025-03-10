@@ -28,6 +28,8 @@
     lutris
     heroic
     mangohud
+    gparted
+    kdePackages.skanpage
   ];
 
   programs.home-manager.enable = true;

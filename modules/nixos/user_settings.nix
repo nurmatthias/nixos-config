@@ -32,9 +32,18 @@
     mesa
     xsettingsd
     xorg.xrdb
+    nvtop
   ];
   
   programs = {
+    corectrl = {
+      enable = true;
+      gpuOverclock = {
+        enable = true;
+        ppfeaturemask = "0xffffffff";
+      };
+    };
+
     steam = {
       enable = true;
       gamescopeSession.enable = true;
