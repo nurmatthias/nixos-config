@@ -32,7 +32,7 @@
     mesa
     xsettingsd
     xorg.xrdb
-    nvtop
+    nvtopPackages.full
   ];
   
   programs = {
